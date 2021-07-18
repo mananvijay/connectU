@@ -1,0 +1,19 @@
+#header{
+    display: flex;
+    background-color: cadetblue;
+    justify-content: space-between;
+    height: 3em;
+    h1{
+        margin-top: 0;
+        color: aliceblue;
+    }
+    #links {
+        margin-top: 1em;
+        margin-right: 1em;
+        a {
+            text-decoration: none;
+            color: white;
+            margin-right: 1em;
+        }
+    }
+}

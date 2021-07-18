@@ -1,13 +1,16 @@
+<link rel = 'stylesheet' href = '/css/header.css'>
 <header>
-    <h1>Page header</h1>
-    <ul>
+    <div id='header'>
+        <div>
+             <h1>CONNECTU</h1> 
+        </div>
+        <div id='links'>
         <% if(locals.user){ %>
-            <li><a href="/user/sign-out">Sign Out</a></li>
+            <a href="/user/sign-out" >Sign Out</a>
             <% } else { %>
-                <li>
-                    <a href="/user/sign-in">Sign In</a>
-                </li>
-                <li><a href="/user/sign-up">Sign Up</a></li>
+                <a href="/user/sign-in" >Sign In</a>
+                <a href="/user/sign-up" >Sign Up</a>
             <% } %>
-    </ul>
+        </div>
+    </div>
 </header>
