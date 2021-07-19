@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Posts = require('../models/posts');
 module.exports.profile = function(req, res){
     return res.render('user_profile');
 }

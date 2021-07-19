@@ -1,11 +1,25 @@
 <link rel="stylesheet" href="/css/home.css">
         <h1>Home</h1>
-
+        <%if(locals.user){%>
         <section>
                 <h4>POSTS!</h4>
-                <form action="" method="POST">
-                        <textarea name="content" cols='30' rows='3' placeholder='Enter your thoughts'></textarea>
+                <form action="/post/upload-post" method="POST">
+                        <textarea name="content" cols='30' rows='3' placeholder='Enter your thoughts' required></textarea>
                         <input type='submit' value='Posts!'>
                 </form>
         </section>
-        
+        <% } %>
+</section>
+<% if(locals.user){ %>
+        <div>
+        <ul>
+                <% for(i of post){ %>
+                        <p>
+                                <li><%= i.content %></li>
+                                <small><%= i.user.name %></small>
+                        </p>
+                <% } %>
+        </ul>
+</div>
+<% } %>
+<section>
