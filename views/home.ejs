@@ -1,25 +1,32 @@
 <link rel="stylesheet" href="/css/home.css">
-        <h1>Home</h1>
-        <%if(locals.user){%>
-        <section>
-                <h4>POSTS!</h4>
+<h1>Home</h1>
+<div id="home-container">
+<%if(locals.user){%>
+        <section id="upload-sec">
+                <h4>Upload Post</h4>
                 <form action="/post/upload-post" method="POST">
-                        <textarea name="content" cols='30' rows='3' placeholder='Enter your thoughts' required></textarea>
+                        <textarea name="content" cols='30' rows='3' placeholder='Enter your thoughts'
+                                required></textarea>
                         <input type='submit' value='Posts!'>
                 </form>
         </section>
         <% } %>
-</section>
-<% if(locals.user){ %>
-        <div>
-        <ul>
-                <% for(i of post){ %>
-                        <p>
-                                <li><%= i.content %></li>
-                                <small><%= i.user.name %></small>
-                        </p>
-                <% } %>
-        </ul>
-</div>
-<% } %>
-<section>
+               <section id="post-sec">
+                       <h4>All Posts</h4>
+                <% if(locals.user){ %>
+                        <div>
+                                <ul>
+                                        <% for(i of post){ %>
+                                                <%- include('_post'); %>
+                                                        <% } %>
+                                </ul>
+                        </div>
+                        <% } %>
+                </section>
+        <section id="friend-sec">
+                <h4>Friends</h4>
+                <% for(u of allUser){ %>
+                        <a href="/user/profile/<%= u.id%>" id="friends-list"><%= u.name %></a>
+                <% } %>        
+        </section> 
+</div>       

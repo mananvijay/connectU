@@ -1,3 +1,41 @@
 body{
-    background-color: bisque;
+    background-color: rgb(52, 56, 95);
+    h1{
+        text-align: center;
+    }
+}
+#home-container{
+    display: flex;
+    height: 100%;
+    #upload-sec{
+        width: 25%;
+        height: 100%;
+        h4{
+            color: beige;
+        }
+    }
+
+    #post-sec{
+        width: 50%;
+        height: 100em;
+        border-left: 2px solid white;
+    }
+
+    #friend-sec{
+        width: 20%;
+        border-left: 2px solid white;
+    }
+    #post-sec, #friend-sec, #upload-sec{
+        padding-left: 2em;
+        height: 100%;
+    }
+        #post-delete, #comment-delete{
+            color: beige;
+            text-decoration: none;
+        }
+        #friends-list{
+            display: block;
+            text-decoration: none;
+            color: white;
+        }
 }

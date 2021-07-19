@@ -1,4 +1,5 @@
 const Post = require('../models/posts');
+const Comment = require('../models/comments');
 const passport = require('passport');
 
 module.exports.uploadPost = function(req, res){
@@ -16,6 +17,19 @@ module.exports.uploadPost = function(req, res){
     }else{
         res.redirect('back');
     }
+}
+
+module.exports.distroy = function(req, res){
+    Post.findById(req.params.id, function(err, post){
+        if(post.user == req.user.id){
+            post.remove();
+            Comment.deleteMany({post: req.params.id}, function(err){
+                return res.redirect('back');
+            });
+        }else{
+            return res.redirect('back');
+        }
+    });
 }
 
 

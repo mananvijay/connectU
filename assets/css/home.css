@@ -1,2 +1,30 @@
 body {
-  background-color: bisque; }
+  background-color: #34385f; }
+  body h1 {
+    text-align: center; }
+
+#home-container {
+  display: flex;
+  height: 100%; }
+  #home-container #upload-sec {
+    width: 25%;
+    height: 100%; }
+    #home-container #upload-sec h4 {
+      color: beige; }
+  #home-container #post-sec {
+    width: 50%;
+    height: 100em;
+    border-left: 2px solid white; }
+  #home-container #friend-sec {
+    width: 20%;
+    border-left: 2px solid white; }
+  #home-container #post-sec, #home-container #friend-sec, #home-container #upload-sec {
+    padding-left: 2em;
+    height: 100%; }
+  #home-container #post-delete, #home-container #comment-delete {
+    color: beige;
+    text-decoration: none; }
+  #home-container #friends-list {
+    display: block;
+    text-decoration: none;
+    color: white; }
