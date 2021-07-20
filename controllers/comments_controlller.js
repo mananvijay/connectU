@@ -1,42 +1,40 @@
 const Comment = require('../models/comments');
 const Post = require('../models/posts');
 
-module.exports.create = function(req, res){
-    Post.findById(req.body.post, function(err, post){
-        if(err){
-            console.log('error while checking post id');
-        }
+module.exports.create = async function(req, res){
+    try{
+        let post = await Post.findById(req.body.post);
         if(post){
-            Comment.create({
+            let comment = await Comment.create({
                 content: req.body.content,
                 user: req.user._id,
                 post: post
-            }, function(err, comment){
-                if(err){
-                    console.log("error while add comment");
-                }
-                post.comments.push(comment);
-                post.save();
-                return res.redirect('/');
             });
+            post.comments.push(comment);
+            post.save();
+            req.flash('success', 'Comment Added');
+            return res.redirect('/');
         }
-    })
+    }catch(err){
+        console.log('Error', err);
+        return;
+    }
 }
 
-module.exports.destory = function(req, res){
-    Comment.findById(req.params.id, function(err, comment){
-        if(err){
-            'error while deleting a comment';
-            return;
-        }
+module.exports.destory = async function(req, res){
+    try{
+        let comment = await Comment.findById(req.params.id);
         if(req.user.id == comment.user){
             let postId = comment.post;
             comment.remove();
-            Post.findByIdAndUpdate(postId, { $pull : {comments: req.params.id}}, function(err, post){
+            let post = await Post.findByIdAndUpdate(postId, { $pull : {comments: req.params.id}});
+            req.flash('error', 'Comment Removed');
                 return res.redirect('back');
-            });
         }else{
             return res.redirect('back');
-        }   
-    });
+        }  
+    }catch(err){
+        console.log('Error', err);
+        return;
+    }
 }

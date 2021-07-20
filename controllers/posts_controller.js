@@ -9,9 +9,10 @@ module.exports.uploadPost = function(req, res){
             user: req.user._id
         }, function(err, post){
             if(err){
-                console.log("error while uploading");
+                req.flash('error', 'Post cannot be uploaded');
                 return;
             }
+            req.flash('success', 'Post Uploaded');
             res.redirect('back');
         });
     }else{
@@ -19,17 +20,30 @@ module.exports.uploadPost = function(req, res){
     }
 }
 
-module.exports.distroy = function(req, res){
-    Post.findById(req.params.id, function(err, post){
-        if(post.user == req.user.id){
-            post.remove();
-            Comment.deleteMany({post: req.params.id}, function(err){
-                return res.redirect('back');
-            });
+module.exports.distroy = async function(req, res){
+    try{
+        let posts = await Post.findById(req.params.id);
+        if(posts.user == req.user.id){
+            posts.remove();
+            let comment = await Comment.deleteMany({post: req.params.id});
+            req.flash('error', 'Post Removed');
+            return res.redirect('back');
         }else{
             return res.redirect('back');
-        }
-    });
+        }        
+    }catch(err){
+        req.flash('error', err);
+    }
+    // Post.findById(req.params.id, function(err, post){
+    //     if(post.user == req.user.id){
+    //         post.remove();
+    //         Comment.deleteMany({post: req.params.id}, function(err){
+    //             return res.redirect('back');
+    //         });
+    //     }else{
+    //         return res.redirect('back');
+    //     }
+    // });
 }
 
 
