@@ -12,7 +12,7 @@ module.exports.create = async function(req, res){
             });
             post.comments.push(comment);
             post.save();
-            req.flash('success', 'Comment Added');
+            req.flash('success', 'Comment added');
             return res.redirect('/');
         }
     }catch(err){

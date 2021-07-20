@@ -2,19 +2,22 @@ const Post = require('../models/posts');
 const Comment = require('../models/comments');
 const passport = require('passport');
 
-module.exports.uploadPost = function(req, res){
+module.exports.uploadPost = async function(req, res){
     if(req.isAuthenticated()){
-        Post.create({
+        let post = await Post.create({
             content: req.body.content,
             user: req.user._id
-        }, function(err, post){
-            if(err){
-                req.flash('error', 'Post cannot be uploaded');
-                return;
-            }
+        });
+        if(req.xhr){
+            return res.status(200).json({
+                data:{
+                    post:post
+                },
+                message: 'Post created'
+            });
+        }
             req.flash('success', 'Post Uploaded');
             res.redirect('back');
-        });
     }else{
         res.redirect('back');
     }
@@ -26,6 +29,13 @@ module.exports.distroy = async function(req, res){
         if(posts.user == req.user.id){
             posts.remove();
             let comment = await Comment.deleteMany({post: req.params.id});
+            if(req.xhr){
+                return res.status(200).json({
+                    data:{
+                        post_id: req.params.id
+                    }, message: 'Post deleted successfully'
+                })
+            }
             req.flash('error', 'Post Removed');
             return res.redirect('back');
         }else{

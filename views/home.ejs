@@ -4,7 +4,7 @@
 <%if(locals.user){%>
         <section id="upload-sec">
                 <h4>Upload Post</h4>
-                <form action="/post/upload-post" method="POST">
+                <form action="/post/upload-post" id="new-post-form" method="POST">
                         <textarea name="content" cols='30' rows='3' placeholder='Enter your thoughts'
                                 required></textarea>
                         <input type='submit' value='Posts!'>
@@ -14,7 +14,7 @@
                <section id="post-sec">
                        <h4>All Posts</h4>
                 <% if(locals.user){ %>
-                        <div>
+                        <div id="post-list-container">
                                 <ul>
                                         <% for(i of post){ %>
                                                 <%- include('_post'); %>
@@ -30,3 +30,4 @@
                 <% } %>        
         </section> 
 </div>       
+<script src="/js/home_post.js"></script>
