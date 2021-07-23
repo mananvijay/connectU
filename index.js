@@ -22,6 +22,7 @@ app.use(sassMiddleware({
 app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(express.static('./assets'));
+app.use('/upload', express.static(__dirname + '/upload'));
 app.use(expressLayouts);
 
 app.set('layout extractStyles', true);
