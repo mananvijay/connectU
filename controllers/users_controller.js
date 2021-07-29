@@ -79,29 +79,6 @@ module.exports.create = async function(req, res){
     }catch(err){
         console.log('Error occurred while finding the user');
     }
-    // User.findOne({email: req.body.email}, function(err, user){
-    //     if(err){
-    //         console.log('Error occurred while finding the user');
-    //     }
-
-    //     if(!user){
-    //         User.create({
-    //             email: req.body.email,
-    //             password: req.body.password,
-    //             name: req.body.name
-    //         }, function(err, user){
-    //             if(err){
-    //                 console.log('Cannot create a user');
-    //                 return;
-    //             }
-    //             return res.redirect('./sign-in');
-    //         });
-    //     }else{
-    //         return res.redirect('Already exisiting email entered')
-    //     }
-    // });
-
-
 }
 
 module.exports.createSession = function(req, res){
